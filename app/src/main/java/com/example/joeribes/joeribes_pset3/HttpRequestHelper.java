@@ -16,15 +16,18 @@ public class HttpRequestHelper {
         String result = "";
         String chosenTag = params[0];
 
+        String API_KEY = "04703f87d9812a511d527c3a322e69c5";
+        String trackURL = "http://ws.audioscrobbler.com/2.0/?method=track.search&track="
+                + chosenTag + "&api_key=" + API_KEY + "&format=json";
+
         // maak van je url een URL object
         URL url = null;
 
         try {
-            url = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=halo&api_key=04703f87d9812a511d527c3a322e69c5&format=json");
+            url = new URL(trackURL);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
 
         HttpURLConnection connect;
 
@@ -34,8 +37,6 @@ public class HttpRequestHelper {
                 connect.setRequestMethod("GET");
 
                 Integer responseCode = connect.getResponseCode();
-
-
 
                 if (responseCode >= 200 && responseCode < 300) {
                     BufferedReader bReader = new BufferedReader(new InputStreamReader(connect.getInputStream()));
