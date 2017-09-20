@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,14 +60,21 @@ public class MainActivity extends AppCompatActivity {
         String trackSearch = etTrack.getText().toString();
         TrackAsyncTask asyncTask = new TrackAsyncTask(this);
         asyncTask.execute(trackSearch);
-
         etTrack.getText().clear();
     }
 
-    public void trackStartIntent(ArrayList<String> trackData) {
+    public void trackStartIntent(Songs[] trackData) {
         Intent dataIntent = new Intent(this, DataActivity.class);
-        dataIntent.putExtra("data", trackData);
+
+        // Passing the serializable via a bundle
+        // https://stackoverflow.com/questions/14333449/passing-data-through-intent-using-serializable
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("data", trackData);
+        dataIntent.putExtras(bundle);
+
         this.startActivity(dataIntent);
     }
+
+
 
 }

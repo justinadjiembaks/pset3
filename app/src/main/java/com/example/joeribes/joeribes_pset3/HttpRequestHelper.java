@@ -16,11 +16,11 @@ public class HttpRequestHelper {
         String result = "";
         String chosenTag = params[0];
 
+        // Create the url link in order to search for a song track
         String API_KEY = "04703f87d9812a511d527c3a322e69c5";
         String trackURL = "http://ws.audioscrobbler.com/2.0/?method=track.search&track="
                 + chosenTag + "&api_key=" + API_KEY + "&format=json";
 
-        // maak van je url een URL object
         URL url = null;
 
         try {

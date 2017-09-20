@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Joeri Bes on 19-9-2017.
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
     Context context;
     MainActivity mainAct;
+    Songs[] trackData;
 
     public TrackAsyncTask(MainActivity main){
         this.mainAct = main;
@@ -41,27 +44,24 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
             Toast.makeText(context, "Something went wrong getting the data from server", Toast.LENGTH_SHORT).show();
         }
         else {
-            ArrayList<String> trackData = new ArrayList<>();
-
             try {
                 JSONObject trackStreamObj = new JSONObject(result);
                 JSONObject resultObj = trackStreamObj.getJSONObject("results");
                 JSONObject trackMatches = resultObj.getJSONObject("trackmatches");
                 JSONArray tracksObj = trackMatches.getJSONArray("track");
 
+                trackData = new Songs[tracksObj.length()];
+
                 // get the track, artist and image url from all the search results
                 for(int i = 0; i < tracksObj.length(); i++) {
                     JSONObject track = tracksObj.getJSONObject(i);
-                    String trackName = track.getString("name");
-                    String artistName = track.getString("artist");
-                    //JSONObject imageURL = tracksObj.getJSONObject(1);
-                    //String image = imageURL.getString("#text");
-
-                    // add the data from search results to the TrackData Arraylist
-                    trackData.add(trackName + " - " + artistName);
+                    String name = track.getString("name");
+                    String artist = track.getString("artist");
+                    JSONArray imageArray = track.getJSONArray("image");
+                    JSONObject imageObj = imageArray.getJSONObject(3);
+                    String imageURL = imageObj.getString("#text");
+                    trackData[i] = new Songs(name, artist, imageURL);
                 }
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
