@@ -27,4 +27,24 @@
         android:layout_weight="0.54"
         app:srcCompat="@mipmap/ic_launcher" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="saveToSharedPrefs"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/myFavorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goToFavorites"
+            android:text="myFavorites" />
+    </LinearLayout>
+
 </LinearLayout>

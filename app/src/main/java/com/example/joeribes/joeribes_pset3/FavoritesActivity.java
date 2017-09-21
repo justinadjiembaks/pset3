@@ -1,46 +1,61 @@
 package com.example.joeribes.joeribes_pset3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
 
-public class DataActivity extends AppCompatActivity {
-    TextView tvResult;
+public class FavoritesActivity extends AppCompatActivity {
+
+    TextView favoriteView;
     ListView lvItems;
     Songs [] songArray;
-    ArrayList<String> trackArray = new ArrayList<String>();
-    ArrayList<String> imgURL = new ArrayList<String>();
+    SharedPreferences shared;
+    ArrayList<String> trackArray;
+    ArrayList<String> imageURL;
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data);
-
+        setContentView(R.layout.activity_favorites);
 
         // Initialize views
+        //favoriteView = (TextView) findViewById(R.id.favoriteView);
         lvItems = (ListView) findViewById(R.id.listViewID);
-
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        songArray = (Songs[]) bundle.getSerializable("data");
-
-        for(Songs song : songArray) {
-            trackArray.add(song.getName() + " - " + song.getArtist());
-            imgURL.add(song.getImageURL());
-        }
-
+        loadFromSharedPrefs();
         makeTrackAdapter();
-
     }
+
+    public void loadFromSharedPrefs(){
+        shared = this.getSharedPreferences("App_settings", this.MODE_PRIVATE);
+        trackArray = new ArrayList<>();
+        imageURL = new ArrayList<>();
+
+        // Load the sets
+        Set<String> set = shared.getStringSet("name", null);
+        Set<String> set2 = shared.getStringSet("imageURL", null);
+        trackArray.addAll(set);
+        imageURL.addAll(set2);
+    }
+
 
     public void makeTrackAdapter() {
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>
@@ -55,7 +70,7 @@ public class DataActivity extends AppCompatActivity {
 
                 // Receive the strings at the clicked position
                 String lv = lvItems.getItemAtPosition(position).toString();
-                String songURL = imgURL.get(position);
+                String songURL = imageURL.get(position);
 
                 // Launching new Activity on selecting single List Item
                 Intent i = new Intent(getApplicationContext(), InformationActivity.class);
@@ -69,4 +84,7 @@ public class DataActivity extends AppCompatActivity {
 
 
     }
+
+
+
 }
