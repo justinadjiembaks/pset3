@@ -19,14 +19,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.64"
             android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.54"
+        android:layout_weight="0.79"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <LinearLayout
@@ -50,5 +50,29 @@
             android:onClick="goToFavorites"
             android:text="My Favorites" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:orientation="vertical"
+        android:layout_weight="0.72"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="vertical">
+
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/navigation" />
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

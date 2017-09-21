@@ -104,6 +104,58 @@ public class FavoritesActivity extends AppCompatActivity {
             }
         });
 
+        lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String track = lvItems.getItemAtPosition(position).toString();
+
+                removeTrack(track);
+                return true;
+            }
+        });
+
+
+    }
+
+    private void removeTrack(String track) {
+        shared = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences.Editor editor = shared.edit();
+
+        Gson gson = new Gson();
+
+        String jsonText = shared.getString("name", "");
+        Type type = new TypeToken<ArrayList<String>>(){}.getType();
+        trackArray = gson.fromJson(jsonText, type);
+
+        String jsonText2 = shared.getString("imgURL", "");
+        Type type2 = new TypeToken<ArrayList<String>>(){}.getType();
+        imageURL = gson.fromJson(jsonText2, type2);
+
+
+        for (int i=0;i<trackArray.size();i++) {
+            if(track.equals(trackArray.get(i))) {
+                trackArray.remove(i);
+                imageURL.remove(i);
+            }
+        }
+
+        // Convert to String
+        String jsonText1 = gson.toJson(trackArray);
+        String jsonText3 = gson.toJson(imageURL);
+
+        // Load the Strings in the editor
+        editor.putString("name", jsonText1);
+        editor.putString("imgURL", jsonText3);
+        editor.apply();
+
+        // Launching new Activity on selecting single List Item
+        Intent i = new Intent(getApplicationContext(), FavoritesActivity.class);
+
+        // Sending data to new activity
+        i.putExtra("listview", track);
+        i.putExtra("songURL", imageURL);
+        startActivity(i);
+
+
 
     }
 

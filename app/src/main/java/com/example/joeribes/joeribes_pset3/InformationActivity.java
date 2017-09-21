@@ -3,9 +3,12 @@ package com.example.joeribes.joeribes_pset3;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +42,28 @@ public class InformationActivity extends AppCompatActivity {
         finish();
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    Intent intent1 = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent1);
+                    finish();
+                    break;
+                case R.id.navigation_favorites:
+                    Intent intent2 = new Intent(getBaseContext(), FavoritesActivity.class);
+                    startActivity(intent2);
+                    finish();
+                    break;
+            }
+            return false;
+        }
+
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +72,8 @@ public class InformationActivity extends AppCompatActivity {
 
         // Initialize views
         TextView txtProduct = (TextView) findViewById(R.id.trackName);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Intent i = getIntent();
         // Getting attached intent data
@@ -72,7 +99,7 @@ public class InformationActivity extends AppCompatActivity {
         } else {
             Type type = new TypeToken<ArrayList<String>>(){}.getType();
             trackArray = gson.fromJson(test, type);
-            trackArray.add(test);
+
         }
 
         if(test2.equals("")) {
@@ -80,22 +107,43 @@ public class InformationActivity extends AppCompatActivity {
         } else {
             Type type2 = new TypeToken<ArrayList<String>>() {}.getType();
             imageURL = gson.fromJson(test2, type2);
-            imageURL.add(test2);
-
         }
 
-        trackArray.add(product);
-        imageURL.add(songURL);
+        boolean duplicate = checkForDuplicates(product);
 
+        if (!duplicate){
+            trackArray.add(product);
+            imageURL.add(songURL);
+        } else {
+            Toast.makeText(this, "This song is already in your favorite list!", Toast.LENGTH_SHORT).show();
+        }
+
+        // Convert to String
         String jsonText = gson.toJson(trackArray);
         String jsonText2 = gson.toJson(imageURL);
 
+        // Load the Strings in the editor
         editor.putString("name", jsonText);
         editor.putString("imgURL", jsonText2);
         editor.apply();
 
+        // Confirmation message
         Toast.makeText(this.getApplicationContext(), "Added to your favorite list", Toast.LENGTH_SHORT).show();
     }
+
+    public boolean checkForDuplicates(String product) {
+        boolean duplicate = false;
+
+        for(int i=0; i< trackArray.size(); i++){
+            if(product.equals(trackArray.get(i))) {
+                duplicate = true;
+            }
+        }
+
+        return duplicate;
+
+    }
+
 
     public void goToFavorites(View view) {
         Intent i = new Intent(getApplicationContext(), FavoritesActivity.class);
