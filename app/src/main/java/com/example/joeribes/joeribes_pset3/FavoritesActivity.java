@@ -1,7 +1,9 @@
 package com.example.joeribes.joeribes_pset3;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -40,20 +47,35 @@ public class FavoritesActivity extends AppCompatActivity {
         // Initialize views
         //favoriteView = (TextView) findViewById(R.id.favoriteView);
         lvItems = (ListView) findViewById(R.id.listViewID);
+
         loadFromSharedPrefs();
         makeTrackAdapter();
     }
 
-    public void loadFromSharedPrefs(){
-        shared = this.getSharedPreferences("App_settings", this.MODE_PRIVATE);
-        trackArray = new ArrayList<>();
-        imageURL = new ArrayList<>();
 
-        // Load the sets
-        Set<String> set = shared.getStringSet("name", null);
-        Set<String> set2 = shared.getStringSet("imageURL", null);
-        trackArray.addAll(set);
-        imageURL.addAll(set2);
+
+
+    public void loadFromSharedPrefs(){
+        shared = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+
+        Gson gson = new Gson();
+
+        String jsonText = shared.getString("name", "");
+        String jsonText2 = shared.getString("imgURL", "");
+
+        if(jsonText.equals("")) {
+            trackArray = new ArrayList<>();
+        } else {
+            Type type = new TypeToken<ArrayList<String>>(){}.getType();
+            trackArray = gson.fromJson(jsonText, type);
+        }
+
+        if(jsonText2.equals("")) {
+            imageURL = new ArrayList<>();
+        } else {
+            Type type2 = new TypeToken<ArrayList<String>>() {}.getType();
+            imageURL = gson.fromJson(jsonText2, type2);
+        }
     }
 
 

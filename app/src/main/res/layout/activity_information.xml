@@ -17,7 +17,9 @@
             android:id="@+id/trackName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.64" />
+            android:layout_weight="0.64"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
     </LinearLayout>
 
     <ImageView
@@ -34,17 +36,19 @@
 
         <Button
             android:id="@+id/button"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="saveToSharedPrefs"
-            android:text="Button" />
+            android:text="Add to favorites" />
 
         <Button
             android:id="@+id/myFavorites"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="goToFavorites"
-            android:text="myFavorites" />
+            android:text="My Favorites" />
     </LinearLayout>
 
 </LinearLayout>

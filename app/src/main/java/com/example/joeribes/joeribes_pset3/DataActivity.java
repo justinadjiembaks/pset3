@@ -21,6 +21,13 @@ public class DataActivity extends AppCompatActivity {
     ArrayList<String> imgURL = new ArrayList<String>();
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
