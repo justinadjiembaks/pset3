@@ -91,6 +91,7 @@ public class InformationActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
+        // Initialize the trackArray
         String test = shared.getString("name", "");
         String test2 = shared.getString("imgURL", "");
 
@@ -109,6 +110,7 @@ public class InformationActivity extends AppCompatActivity {
             imageURL = gson.fromJson(test2, type2);
         }
 
+        // Remove duplicates
         boolean duplicate = checkForDuplicates(product);
 
         if (!duplicate){

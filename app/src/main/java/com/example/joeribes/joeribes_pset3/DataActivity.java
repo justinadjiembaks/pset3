@@ -1,8 +1,11 @@
 package com.example.joeribes.joeribes_pset3;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,11 +17,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DataActivity extends AppCompatActivity {
-    TextView tvResult;
     ListView lvItems;
     Songs [] songArray;
     ArrayList<String> trackArray = new ArrayList<String>();
     ArrayList<String> imgURL = new ArrayList<String>();
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    Intent intent1 = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent1);
+                    finish();
+                    break;
+                case R.id.navigation_favorites:
+                    Intent intent2 = new Intent(getBaseContext(), FavoritesActivity.class);
+                    startActivity(intent2);
+                    finish();
+                    break;
+            }
+            return false;
+        }
+
+    };
 
     @Override
     public void onBackPressed() {
@@ -35,6 +59,8 @@ public class DataActivity extends AppCompatActivity {
 
         // Initialize views
         lvItems = (ListView) findViewById(R.id.listViewID);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();

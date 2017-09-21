@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        // Initialize views
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -54,9 +55,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void trackSearch(View view) {
         String trackSearch = etTrack.getText().toString();
-        TrackAsyncTask asyncTask = new TrackAsyncTask(this);
-        asyncTask.execute(trackSearch);
-        etTrack.getText().clear();
+
+        if(trackSearch.equals("")){
+            Toast.makeText(this.getApplicationContext(), "Please insert at least one character",
+                    Toast.LENGTH_SHORT).show();
+
+        } else {
+            TrackAsyncTask asyncTask = new TrackAsyncTask(this);
+            asyncTask.execute(trackSearch);
+            etTrack.getText().clear();
+        }
     }
 
     public void trackStartIntent(Songs[] trackData) {

@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="248dp"
+        android:layout_height="98dp"
         android:orientation="vertical">
 
         <TextView
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.64"
             android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
     </LinearLayout>
 
     <ImageView
@@ -32,7 +32,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="87dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="0.22">
 
         <Button
             android:id="@+id/button"
@@ -50,12 +51,6 @@
             android:onClick="goToFavorites"
             android:text="My Favorites" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:orientation="vertical"
-        android:layout_weight="0.27"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,13 +26,32 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class FavoritesActivity extends AppCompatActivity {
-
-    TextView favoriteView;
     ListView lvItems;
-    Songs [] songArray;
     SharedPreferences shared;
     ArrayList<String> trackArray;
     ArrayList<String> imageURL;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    Intent intent1 = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent1);
+                    finish();
+                    break;
+                case R.id.navigation_favorites:
+                    Intent intent2 = new Intent(getBaseContext(), FavoritesActivity.class);
+                    startActivity(intent2);
+                    finish();
+                    break;
+            }
+            return false;
+        }
+
+    };
 
 
     @Override
@@ -45,8 +67,9 @@ public class FavoritesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorites);
 
         // Initialize views
-        //favoriteView = (TextView) findViewById(R.id.favoriteView);
         lvItems = (ListView) findViewById(R.id.listViewID);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loadFromSharedPrefs();
         makeTrackAdapter();
@@ -130,7 +153,7 @@ public class FavoritesActivity extends AppCompatActivity {
         Type type2 = new TypeToken<ArrayList<String>>(){}.getType();
         imageURL = gson.fromJson(jsonText2, type2);
 
-
+        // Loop through the array in order to delete the right item
         for (int i=0;i<trackArray.size();i++) {
             if(track.equals(trackArray.get(i))) {
                 trackArray.remove(i);
