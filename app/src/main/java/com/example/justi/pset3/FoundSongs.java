@@ -9,8 +9,6 @@ import java.io.Serializable;
 public class FoundSongs implements Serializable {
     private String name, artist, imageURL;
 
-    public FoundSongs(){
-    }
 
     public FoundSongs(String TheName, String TheArtist, String TheImageURL) {
         this.name = TheName;
