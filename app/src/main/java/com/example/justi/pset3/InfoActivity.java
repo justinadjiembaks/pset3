@@ -44,13 +44,13 @@ public class InfoActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Intent intent1 = new Intent(getBaseContext(), MainActivity.class);
-                    startActivity(intent1);
+                    Intent intentmain = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intentmain);
                     finish();
                     break;
                 case R.id.navigation_favorites:
-                    Intent intent2 = new Intent(getBaseContext(), FavoritesActivity.class);
-                    startActivity(intent2);
+                    Intent intentfavorites = new Intent(getBaseContext(), FavoritesActivity.class);
+                    startActivity(intentfavorites);
                     finish();
                     break;
             }

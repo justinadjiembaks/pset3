@@ -18,16 +18,19 @@ public class FoundSongs implements Serializable {
 
     // Returns the Track name
     public String getName() {
+
         return name;
     }
 
     // Returns the Artist
     public String getArtist() {
+
         return artist;
     }
 
     // Returns the image URL
     public String getImageURL() {
+
         return imageURL;
     }
 
