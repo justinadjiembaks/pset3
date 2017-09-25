@@ -16,15 +16,13 @@ public class HttpRequestHelper {
         String result = "";
         String chosenTag = params[0];
 
-        // Create the url link in order to search for a song track
-        String API_KEY = "04703f87d9812a511d527c3a322e69c5";
-        String trackURL = "http://ws.audioscrobbler.com/2.0/?method=track.search&track="
-                + chosenTag + "&api_key=" + API_KEY + "&format=json";
+        String urllastfm = "http://ws.audioscrobbler.com/2.0/?method=track.search&track="
+                + chosenTag + "&api_key=862cbe4b25a7e8b3ac882ed37e7f8720&format=json";
 
         URL url = null;
 
         try {
-            url = new URL(trackURL);
+            url = new URL(urllastfm);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

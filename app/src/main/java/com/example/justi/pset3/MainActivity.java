@@ -45,13 +45,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize views
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         etTrack = (EditText) findViewById(R.id.etTrack);
         assert etTrack != null;
-        etTrack.setHint("Search for a Track");
 
     }
 
@@ -72,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
     public void trackStartIntent(FoundSongs[] trackData) {
         Intent dataIntent = new Intent(this, DataActivity.class);
 
-        // Passing the serializable via a bundle
-        // https://stackoverflow.com/questions/14333449/passing-data-through-intent-using-serializable
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", trackData);
         dataIntent.putExtras(bundle);

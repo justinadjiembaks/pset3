@@ -66,7 +66,7 @@ public class DataActivity extends AppCompatActivity {
         songArray = (FoundSongs[]) bundle.getSerializable("data");
 
         for(FoundSongs song : songArray) {
-            trackArray.add(song.getName() + " - " + song.getArtist());
+            trackArray.add( song.getArtist()+ " - [ " + song.getName()+ " ] ");
             imgURL.add(song.getImageURL());
         }
 
@@ -90,7 +90,7 @@ public class DataActivity extends AppCompatActivity {
                 String songURL = imgURL.get(position);
 
                 // Launching new Activity on selecting single List Item
-                Intent i = new Intent(getApplicationContext(), InformationActivity.class);
+                Intent i = new Intent(getApplicationContext(), InfoActivity.class);
 
                 // Sending data to new activity
                 i.putExtra("listview", lv);

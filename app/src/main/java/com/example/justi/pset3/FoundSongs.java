@@ -12,10 +12,10 @@ public class FoundSongs implements Serializable {
     public FoundSongs(){
     }
 
-    public FoundSongs(String aName, String anArtist, String anImageURL) {
-        this.name = aName;
-        this.artist = anArtist;
-        this.imageURL = anImageURL;
+    public FoundSongs(String TheName, String TheArtist, String TheImageURL) {
+        this.name = TheName;
+        this.artist = TheArtist;
+        this.imageURL = TheImageURL;
     }
 
     // Returns the Track name

@@ -20,7 +20,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class InformationActivity extends AppCompatActivity {
+public class InfoActivity extends AppCompatActivity {
     TextView txtProduct;
     String product;
     String songURL;
@@ -77,7 +77,7 @@ public class InformationActivity extends AppCompatActivity {
         txtProduct.setText(product);
 
         // Display the image of the Track
-        new DownloadImageTask((ImageView) findViewById(R.id.imageView)).execute(songURL);
+        new ImageDownload((ImageView) findViewById(R.id.imageView)).execute(songURL);
     }
 
     public void saveToSharedPrefs(View view) {

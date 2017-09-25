@@ -114,7 +114,7 @@ public class FavoritesActivity extends AppCompatActivity {
                 String songURL = imageURL.get(position);
 
                 // Launching new Activity on selecting single List Item
-                Intent i = new Intent(getApplicationContext(), InformationActivity.class);
+                Intent i = new Intent(getApplicationContext(), InfoActivity.class);
 
                 // Sending data to new activity
                 i.putExtra("listview", lv);
