@@ -1,4 +1,4 @@
-package com.example.joeribes.joeribes_pset3;
+package com.example.justi.pset3;package="com.example.pset3"
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.joeribes.joeribes_pset3;
+package com.example.justi.pset3;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,23 +7,18 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pset3.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class InformationActivity extends AppCompatActivity {
     TextView txtProduct;

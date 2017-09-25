@@ -1,4 +1,4 @@
-package com.example.joeribes.joeribes_pset3;
+package com.example.justi.pset3;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.pset3.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void trackStartIntent(Songs[] trackData) {
+    public void trackStartIntent(FoundSongs[] trackData) {
         Intent dataIntent = new Intent(this, DataActivity.class);
 
         // Passing the serializable via a bundle

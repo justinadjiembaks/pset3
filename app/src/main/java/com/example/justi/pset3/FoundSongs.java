@@ -1,18 +1,18 @@
-package com.example.joeribes.joeribes_pset3;
+package com.example.justi.pset3;
 
 import java.io.Serializable;
 
 /**
- * Created by Joeri Bes on 20-9-2017.
+ * Created by justi on 20-9-2017.
  */
 
-public class Songs implements Serializable {
+public class FoundSongs implements Serializable {
     private String name, artist, imageURL;
 
-    public Songs(){
+    public FoundSongs(){
     }
 
-    public Songs(String aName, String anArtist, String anImageURL) {
+    public FoundSongs(String aName, String anArtist, String anImageURL) {
         this.name = aName;
         this.artist = anArtist;
         this.imageURL = anImageURL;

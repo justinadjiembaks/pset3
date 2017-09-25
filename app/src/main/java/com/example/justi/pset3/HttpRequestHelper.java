@@ -1,4 +1,4 @@
-package com.example.joeribes.joeribes_pset3;
+package com.example.justi.pset3;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by Joeri Bes on 19-9-2017.
+ * Created by justi on 20-9-2017.
  */
 
 public class HttpRequestHelper {

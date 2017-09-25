@@ -1,4 +1,4 @@
-package com.example.joeribes.joeribes_pset3;
+package com.example.justi.pset3;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,15 +10,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.example.pset3.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DataActivity extends AppCompatActivity {
-    ListView lvItems;
-    Songs [] songArray;
+    FoundSongs[] songArray;
+    ListView listviewitems;
     ArrayList<String> trackArray = new ArrayList<String>();
     ArrayList<String> imgURL = new ArrayList<String>();
 
@@ -58,15 +57,15 @@ public class DataActivity extends AppCompatActivity {
 
 
         // Initialize views
-        lvItems = (ListView) findViewById(R.id.listViewID);
+        listviewitems = (ListView) findViewById(R.id.listViewID);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
-        songArray = (Songs[]) bundle.getSerializable("data");
+        songArray = (FoundSongs[]) bundle.getSerializable("data");
 
-        for(Songs song : songArray) {
+        for(FoundSongs song : songArray) {
             trackArray.add(song.getName() + " - " + song.getArtist());
             imgURL.add(song.getImageURL());
         }
@@ -79,15 +78,15 @@ public class DataActivity extends AppCompatActivity {
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, android.R.id.text1, trackArray);
 
-        lvItems = (ListView) findViewById(R.id.listViewID);
-        assert lvItems != null;
-        lvItems.setAdapter(arrayAdapter);
+        listviewitems = (ListView) findViewById(R.id.listViewID);
+        assert listviewitems != null;
+        listviewitems.setAdapter(arrayAdapter);
 
-        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listviewitems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // Receive the strings at the clicked position
-                String lv = lvItems.getItemAtPosition(position).toString();
+                String lv = listviewitems.getItemAtPosition(position).toString();
                 String songURL = imgURL.get(position);
 
                 // Launching new Activity on selecting single List Item

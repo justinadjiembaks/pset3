@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.joeribes.joeribes_pset3.InformationActivity"
+    tools:context="com.example.pset3.com.example.joeribes.pset3.InformationActivity"
     android:weightSum="1">
 
     <LinearLayout

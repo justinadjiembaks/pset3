@@ -1,4 +1,4 @@
-package com.example.joeribes.joeribes_pset3;
+package com.example.justi.pset3;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,9 +9,8 @@ import android.widget.ImageView;
 import java.io.InputStream;
 
 /**
- * Created by Joeri Bes on 20-9-2017.
+ * Created by Justi on 23-9-2017.
  *
- * https://stackoverflow.com/questions/5776851/load-image-from-url
  */
 
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

@@ -1,4 +1,4 @@
-package com.example.joeribes.joeribes_pset3;
+package com.example.justi.pset3;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -8,18 +8,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 /**
- * Created by Joeri Bes on 19-9-2017.
+ * Created by justi on 19-9-2017.
  */
 
 public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
     Context context;
     MainActivity mainAct;
-    Songs[] trackData;
+    FoundSongs[] trackData;
 
     public TrackAsyncTask(MainActivity main){
         this.mainAct = main;
@@ -41,7 +37,7 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
         super.onPostExecute(result);
 
         if (result.length() == 0) {
-            Toast.makeText(context, "Something went wrong getting the data from server", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Error: No data from server", Toast.LENGTH_SHORT).show();
         }
         else {
             try {
@@ -50,7 +46,7 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
                 JSONObject trackMatches = resultObj.getJSONObject("trackmatches");
                 JSONArray tracksObj = trackMatches.getJSONArray("track");
 
-                trackData = new Songs[tracksObj.length()];
+                trackData = new FoundSongs[tracksObj.length()];
 
                 // get the track, artist and image url from all the search results
                 for(int i = 0; i < tracksObj.length(); i++) {
@@ -60,7 +56,7 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
                     JSONArray imageArray = track.getJSONArray("image");
                     JSONObject imageObj = imageArray.getJSONObject(3);
                     String imageURL = imageObj.getString("#text");
-                    trackData[i] = new Songs(name, artist, imageURL);
+                    trackData[i] = new FoundSongs(name, artist, imageURL);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
