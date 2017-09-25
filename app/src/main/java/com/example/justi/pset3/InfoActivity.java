@@ -65,18 +65,17 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
-        // Initialize views
         TextView txtProduct = (TextView) findViewById(R.id.trackName);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Intent i = getIntent();
-        // Getting attached intent data
+
         product = i.getStringExtra("listview");
         songURL = i.getStringExtra("songURL");
         txtProduct.setText(product);
 
-        // Display the image of the Track
+
         new ImageDownload((ImageView) findViewById(R.id.imageView)).execute(songURL);
     }
 
@@ -86,7 +85,6 @@ public class InfoActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
-        // Initialize the trackArray
         String test = shared.getString("name", "");
         String test2 = shared.getString("imgURL", "");
 
@@ -105,7 +103,7 @@ public class InfoActivity extends AppCompatActivity {
             imageURL = gson.fromJson(test2, type2);
         }
 
-        // Remove duplicates
+
         boolean duplicate = checkForDuplicates(product);
 
         if (!duplicate){
@@ -115,16 +113,13 @@ public class InfoActivity extends AppCompatActivity {
             Toast.makeText(this, "This song is already in your favorite list!", Toast.LENGTH_SHORT).show();
         }
 
-        // Convert to String
         String jsonText = gson.toJson(trackArray);
         String jsonText2 = gson.toJson(imageURL);
 
-        // Load the Strings in the editor
         editor.putString("name", jsonText);
         editor.putString("imgURL", jsonText2);
         editor.apply();
 
-        // Confirmation message
         Toast.makeText(this.getApplicationContext(), "Added to your favorite list", Toast.LENGTH_SHORT).show();
     }
 
@@ -144,7 +139,6 @@ public class InfoActivity extends AppCompatActivity {
 
     public void goToFavorites(View view) {
         Intent i = new Intent(getApplicationContext(), FavoritesActivity.class);
-        // Sending data to new activity
         i.putExtra("listview", product);
         i.putExtra("songURL", songURL);
         startActivity(i);
